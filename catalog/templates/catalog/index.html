@@ -1,0 +1,33 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+
+<div class="card">
+    <h5 class="card-header">Number of Books</h5>
+    <div class="card-body">
+      <h5 class="card-title">{{ num_books }}</h5>
+      <p class="card-text"> EDIT ME</p>
+      <a href="{% url 'catalog:books_list' %}" class="btn btn-primary">Books Page</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h5 class="card-header">Number of Rentals</h5>
+    <div class="card-body">
+      <h5 class="card-title">{{ num_instances }}</h5>
+      <p class="card-text"> EDIT ME</p>
+      <a href="{% url 'catalog:books_list' %}" class="btn btn-primary">Books Page</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h5 class="card-header">Number of Available Books</h5>
+    <div class="card-body">
+      <h5 class="card-title">{{ num_instances_available }}</h5>
+      <p class="card-text"> EDIT ME</p>
+      <a href="{% url 'catalog:books_list' %}" class="btn btn-primary">Books Page</a>
+    </div>
+  </div>
+
+{% endblock content %}
+    

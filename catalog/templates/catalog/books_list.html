@@ -1,0 +1,21 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+    
+    
+    {% if book_list %}
+        
+        <br>    
+
+        {% for book in book_list %}
+
+            <ul>{{ book.title }}</ul>
+
+        {% endfor %}
+            
+
+    {% endif %}
+        
+
+{% endblock content %}
+    
