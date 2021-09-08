@@ -2,32 +2,22 @@
 
 {% block content %}
 
-<div class="card">
-    <h5 class="card-header">Number of Books</h5>
-    <div class="card-body">
-      <h5 class="card-title">{{ num_books }}</h5>
-      <p class="card-text"> EDIT ME</p>
-      <a href="{% url 'catalog:books_list' %}" class="btn btn-primary">Books Page</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h5 class="card-header">Number of Rentals</h5>
-    <div class="card-body">
-      <h5 class="card-title">{{ num_instances }}</h5>
-      <p class="card-text"> EDIT ME</p>
-      <a href="{% url 'catalog:books_list' %}" class="btn btn-primary">Books Page</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h5 class="card-header">Number of Available Books</h5>
-    <div class="card-body">
-      <h5 class="card-title">{{ num_instances_available }}</h5>
-      <p class="card-text"> EDIT ME</p>
-      <a href="{% url 'catalog:books_list' %}" class="btn btn-primary">Books Page</a>
-    </div>
-  </div>
+<br>
+<div class="container-fluid">
+  <h3>
+    Library Records
+    <small class="text-muted">Quick stats about the books and authors available</small>
+  </h3>
+</div>
+<br>
+<div class="container-fluid">
+  <ul>
+    <li><strong>Books: </strong>{{ num_books }}</li>
+    <li><strong>Copies: </strong>{{ num_instances }}</li>
+    <li><strong>Copies Available: </strong>{{ num_instances_available }}</li>
+    <li><strong>Authors: </strong>{{ num_authors }}</li>
+  </ul>
+</div>
 
 {% endblock content %}
     
