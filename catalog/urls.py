@@ -6,8 +6,8 @@ app_name = "catalog"
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("books/", views.books_list, name="books_list" ),
-    path("authors/", views.authors_list, name="authors_list"),
-    path("book/<int:id>/", views.detail, name="detail"),
-    path("author/<int:id>/", views.detail, name="detail"),
+    path("books/", views.BookListView.as_view(), name="book_list" ),
+    path("book/<int:pk>/", views.BookDetailView.as_view(), name="book_detail"),
+    path("authors/", views.AuthorListView.as_view(), name="author_list"),
+    path("author/<int:pk>/", views.AuthorDetailView.as_view(), name="author_detail"),
 ]
