@@ -1,8 +1,10 @@
 {% extends 'catalog/base.html' %}
 
 {% block content %}
-
 <br>
+<div class="container-fluid">
+  <p><em>A tutorial by the Mozilla Development Network</em></p>
+</div>
 <div class="container-fluid">
   <h3>
     Library Records
@@ -15,6 +17,7 @@
     <li><strong>Books: </strong>{{ num_books }}</li>
     <li><strong>Copies: </strong>{{ num_instances }}</li>
     <li><strong>Copies Available: </strong>{{ num_instances_available }}</li>
+    <li><strong>Genres: </strong>{{ num_genres }}</li>
     <li><strong>Authors: </strong>{{ num_authors }}</li>
   </ul>
 </div>

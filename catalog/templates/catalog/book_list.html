@@ -1,0 +1,39 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+    
+    
+    {% if book_list %}
+        
+        <br>    
+        <div class="container-fluid">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                    </tr>
+                </thead>
+              </table>
+        </div>
+        <div class="container-fluid">  
+            {% for book in book_list %}
+                <tbody>
+                    <tr>
+                        <a href="{% url 'catalog:book_detail' book.id %}">{{ book.title }}</a>
+                    </tr>
+                </tbody>
+                <br>
+            {% endfor %}
+        </div>
+
+    {% else %}
+
+        <div class="alert alert-warning" role="alert">
+            Uh oh -- all the books disappeared.
+        </div>
+
+    {% endif %}
+        
+
+{% endblock content %}
+    
