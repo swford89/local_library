@@ -6,23 +6,10 @@
     {% if book_list %}
         
         <br>    
-        <div class="container-fluid">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Title</th>
-                    </tr>
-                </thead>
-              </table>
-        </div>
-        <div class="container-fluid">  
+        <div class="container-fluid"> 
+            <h5>Book List:</h5> 
             {% for book in book_list %}
-                <tbody>
-                    <tr>
-                        <a href="{% url 'catalog:book_detail' book.id %}">{{ book.title }}</a>
-                    </tr>
-                </tbody>
-                <br>
+                <li><a href="{% url 'catalog:book_detail' book.id %}">{{ book.title }}</a></li> 
             {% endfor %}
         </div>
 

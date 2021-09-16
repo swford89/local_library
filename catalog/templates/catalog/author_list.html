@@ -4,34 +4,18 @@
 
     
     {% if author_list %}
-
     <br>    
-    <div class="container-fluid">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                </tr>
-            </thead>
-          </table>
-    </div>
     <div class="container-fluid">  
+        <h5>Author List:</h5>
         {% for author in author_list %}
-            <tbody>
-                <tr>
-                    <a href="{% url 'catalog:author_detail' author.id %}">{{ author }}</a>
-                </tr>
-            </tbody>
-            <br>
+            <li><a href="{% url 'catalog:author_detail' author.id %}">{{ author }}</a></li>
         {% endfor %}
     </div>
 
     {% else %}
-
         <div class="alert alert-warning" role="alert">
             Uh oh -- there doesn't seem to be any authors.
         </div>
-            
     {% endif %}
         
 
