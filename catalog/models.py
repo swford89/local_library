@@ -1,6 +1,6 @@
 import uuid
 from django.db import models
-from django.urls import reverse
+# from django.urls import reverse
 
 # Create your models here.
 class Genre(models.Model):
@@ -37,9 +37,10 @@ class Book(models.Model):
         """String representation of Book object."""
         return self.title
     
-    def get_absolute_url(self):
-        """Returns the url to access a detail record for this book."""
-        return reverse('book-detail', args=[str(self.id)])
+    # using dynamic url instead
+    # def get_absolute_url(self):
+    #     """Returns the url to access a detail record for this book."""
+    #     return reverse('book_detail', args=[str(self.id)])
 
     def display_genre(self):
         """Create a string for genre; required to display genre in Admin"""
@@ -86,9 +87,10 @@ class Author(models.Model):
     class Meta:
         ordering = ['last_name', 'first_name', 'middle_name']
 
-    def get_absolute_url(self):
-        """Returns the url to access a particular author instance."""
-        return reverse('author-detail', args=[str(self.id)])
+    # using dynamic url instead
+    # def get_absolute_url(self):
+    #     """Returns the url to access a particular author instance."""
+    #     return reverse('author_detail', args=[str(self.id)])
 
     def __str__(self):
         if self.middle_name:
