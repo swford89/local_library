@@ -1,0 +1,60 @@
+{% extends 'catalog/base.html' %}
+
+
+{% block content %}
+    
+<div class="card" style="margin-left: 20px; margin-top: 20px; margin-right: 20px;">
+    <div class="card-body">
+      <h2 class="card-title">{{ book.title }}</h2>
+      <h6 class="card-subtitle mb-2 text-muted">{{ book.author }}</h6>
+      <p class="card-text"><strong>Summary:</strong><br>{{ book.summary }}</p>
+      <p class="card-text"><strong>ISBN: </strong>{{ book.isbn }}</p>
+      <p class="card-text"><strong>Genre: </strong>{{book.genre.all|join:", " }}</p>
+      <p class="card-text"><strong>Language: </strong>{{ book.language }}</p>
+    </div>
+  </div>
+
+<br>
+
+<div class="card" style="margin-left: 20px; margin-right: 20px;">
+    <div class="card-body">
+        <h2 class="card-title">Copies</h2>
+        <p class="text-muted">Number of copies: <strong>{{ book.bookinstance_set.all.count }}</strong></p>
+        {% for copy in book.bookinstance_set.all %}
+          
+          {% if copy.status == "a" %}
+
+          <div style="margin-left: 20px;">
+            <h5 class="text-success">Available</h5>
+            <ol><strong>ID: </strong>{{ copy.id }}</ol>
+          </div>
+          
+          {% elif copy.status == "m" %}
+
+          <div style="margin-left: 20px;">
+            <h5 class="text-warning">Maintenance</h5>
+            <ol><strong>ID: </strong>{{ copy.id }}</ol>
+          </div>
+
+          {% elif copy.status == "o" %}
+
+          <div style="margin-left: 20px;">
+            <h5 class="text-danger">On loan</h5>
+            <p><em>-- Due back: </em>{{ copy.due_back }}</p>
+            <ol><strong>ID: </strong>{{ copy.id }}</ol>
+          </div>
+
+          {% elif copy.status == "r" %}
+
+            <ol class="text-warning">Reserved</ol>
+            <ol><strong>ID: </strong>{{ copy.id }}</ol>
+
+          {% endif %}
+            
+          
+        {% endfor %}
+    </div> 
+</div>
+
+{% endblock content %}
+    

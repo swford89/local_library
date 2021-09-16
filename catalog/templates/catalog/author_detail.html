@@ -1,0 +1,27 @@
+{% extends 'catalog/base.html' %}
+
+
+{% block content %}
+    
+<div class="card" style="margin-left: 20px; margin-top: 20px; margin-right: 20px;">
+    <div class="card-body">
+      <h2 class="card-title">{{ author }}</h2>
+      <h6 class="card-subtitle mb-2 text-muted">{{ author.date_of_birth }} - {{ author.date_of_death }}</h6>
+    </div>
+  </div>
+
+<div class="card" style="margin-left: 20px; margin-top: 20px; margin-right: 20px;">
+    <div class="card-body">
+      <h2 class="card-title">Books</h2>
+      <h6 class="card-subtitle mb-2 text-muted">What we have by them in stock</h6>
+      
+      {% for book in author.choice_set.all %}
+
+        <li>{{ book }}</li>
+        
+      {% endfor %}
+      
+    </div>
+</div>
+
+{% endblock content %}
