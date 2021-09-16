@@ -27,6 +27,7 @@ def index(request):
 class BookListView(generic.ListView):
     model = Book
     template_name = "catalog/book_list.html"
+    paginate_by = 10
 
 # def book_list(request):
 #     book_list = Book.objects.all()
