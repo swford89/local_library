@@ -7,17 +7,27 @@
     <div class="card-body">
       <h2 class="card-title">{{ author }}</h2>
       <h6 class="card-subtitle mb-2 text-muted">{{ author.date_of_birth }} - {{ author.date_of_death }}</h6>
+      
+      {% if author.middle_name|length > 0 %}
+
+        <a href="https://en.wikipedia.org/wiki/{{ author.first_name }}_{{ author.middle_name }}_{{ author.last_name }}">Wiki Link</a>
+      
+      {% elif author.middle_name|length == 0 %}
+
+        <a href="https://en.wikipedia.org/wiki/{{ author.first_name }}_{{ author.last_name }}">Wiki Link</a>
+
+      {% endif %}
     </div>
   </div>
 
 <div class="card" style="margin-left: 20px; margin-top: 20px; margin-right: 20px;">
     <div class="card-body">
       <h2 class="card-title">Books</h2>
-      <h6 class="card-subtitle mb-2 text-muted">What we have by them in stock</h6>
+      <h6 class="card-subtitle mb-2 text-muted">What we have</h6>
       
-      {% for book in author.choice_set.all %}
+      {% for book in author.book_set.all %}
 
-        <li>{{ book }}</li>
+        <li><a href="{% url 'catalog:book_detail' book.id %}">{{ book.title }}</a></li>
         
       {% endfor %}
       
