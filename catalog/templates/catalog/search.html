@@ -1,0 +1,31 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+    
+    {% if books %}
+        <br>
+        <div class="containter-fluid">
+            <h5>Book Results:</h5>
+            {% for book in books %}
+                <li><a href="{% url 'catalog:book_detail' book.id %}">{{ book }}</a></li>
+            {% endfor %}        
+        </div>
+
+    {% elif authors %}
+        <br>
+        <div class="container-fluid">
+            <h5>Author Results:</h5>
+            {% for author in authors %}
+                <li><a href="{% url 'catalog:author_detail' author.id %}">{{ author }}</a></li>
+            {% endfor %}
+        </div>    
+    {% else %}
+        <div class="alert alert-warning" role="alert">
+            Uh oh -- that either doesn't exist in our database, or there is a spelling error.
+        </div>
+
+    {% endif %}
+        
+
+{% endblock content %}
+    

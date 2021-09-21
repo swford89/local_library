@@ -1,5 +1,8 @@
+from django.db.models import Q
 from django.shortcuts import render
+from django.urls import reverse
 from django.views import generic
+from django.views.generic.list import ListView
 from catalog.models import Author, Book, BookInstance, Genre, Language
 
 # Create your views here.
@@ -50,3 +53,16 @@ class BookDetailView(generic.DetailView):
 class AuthorDetailView(generic.DetailView):
     model = Author
     template_name = "catalog/author_detail.html"
+
+# search view
+def search(request):
+    """searching for book title from search bar"""
+    user_search = request.GET['search']
+    if user_search:
+        books = Book.objects.filter(Q(title__icontains=user_search))
+        authors = Author.objects.all().filter(Q(first_name__icontains=user_search))
+        context = {
+            "books": books,
+            "authors": authors,
+            }
+        return render(request, "catalog/search.html", context)
