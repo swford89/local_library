@@ -4,7 +4,7 @@
     
     {% if books %}
         <br>
-        <div class="containter-fluid">
+        <div class="containter-fluid" style="margin-left: 12px;">
             <h5>Book Results:</h5>
             {% for book in books %}
                 <li><a href="{% url 'catalog:book_detail' book.id %}">{{ book }}</a></li>
@@ -13,7 +13,7 @@
 
     {% elif authors %}
         <br>
-        <div class="container-fluid">
+        <div class="container-fluid" style="margin-left: 12px;">
             <h5>Author Results:</h5>
             {% for author in authors %}
                 <li><a href="{% url 'catalog:author_detail' author.id %}">{{ author }}</a></li>

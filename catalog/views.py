@@ -17,6 +17,9 @@ def index(request):
     num_authors = Author.objects.all().count()
     # number of genres
     num_genres = Genre.objects.all().count()
+    # number of visits, counted with the session variable
+    num_visits = request.session.get("num_visits", 0)
+    request.session["num_visits"] = num_visits + 1
     # context dict to pass to template
     context = {
         "num_books": num_books,
@@ -24,6 +27,7 @@ def index(request):
         "num_instances_available": num_instances_available,
         "num_genres": num_genres,
         "num_authors": num_authors,
+        "num_visits": num_visits,
     }
     return render(request, "catalog/index.html", context)
 

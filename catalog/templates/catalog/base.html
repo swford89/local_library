@@ -24,7 +24,7 @@
                 </li>
                 <form class="d-flex" action="{% url 'catalog:search' %}" method="GET">
                     {% csrf_token %}
-                    <input class="form-control me-2" type="search" placeholder="Author or Book Search" aria-label="Search" name="search"  style="margin-top: 4px;">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search"  style="margin-top: 4px;">
                     <button class="btn btn-outline-success" type="submit" style="margin-top: 4px;">Search</button>
                 </form>
             </ul>
