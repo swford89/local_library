@@ -6,7 +6,7 @@
 
     <div class="alert alert-warning" role="alert">
         Your email or password didn't match. Try again.
-      </div>
+    </div>
 
     {% endif %}
     
@@ -14,11 +14,15 @@
 
         {% if user.is_authenticated %}
 
-            <p>Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
+            <div class="alert alert-warning" role="alert">
+                Your account doesn't have access to this page. To proceed, please login with an account that has access.
+            </div>
 
         {% else %}
 
-            <p>Please login to view this page.</p>
+            <div class="alert alert-warning" role="alert">
+                Please login to view this page.
+            </div>
 
         {% endif %}    
 
@@ -63,7 +67,7 @@
                                     </i>
                                 </span>
                             </div>
-                            <input class="form-control" placeholder="*****" type="password">
+                            <input class="form-control" placeholder="*******" type="password">
                         </div>
                         <!--input group//-->
                     </div>
@@ -71,13 +75,18 @@
 
                     <br>
                     <div class="form-group">
-                        <button class="btn btn-primary btn-block" type="submit">Login</button>
+                        <button class="btn btn-primary btn-block" type="submit" value="login">Login</button>
+                        <input type="hidden" name="next" value="{{ next }}">
                     </div>
                     <!--form group//-->
                 </form>
+                <p class="text-center">
+                    <a class="btn" href="{% url 'password_reset' %}">Forgot password?</a>
+                </p>
             </article>
         </div>
         <!--card.//-->
     </div>
+
 {% endblock content %}
     
