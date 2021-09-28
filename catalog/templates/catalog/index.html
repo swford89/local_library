@@ -3,22 +3,22 @@
 {% block content %}
 <br>
 <div class="container-fluid">
-  <p><em>A tutorial by the Mozilla Development Network</em></p>
-</div>
-<div class="container-fluid">
-  <h3>
-    Library Records
-    <small class="text-muted">Quick stats about the books and authors available</small>
-  </h3>
-</div>
-<div class="container-fluid">
-  <ul>
-    <li><strong>Books: </strong>{{ num_books }}</li>
-    <li><strong>Copies: </strong>{{ num_instances }}</li>
-    <li><strong>Copies Available: </strong>{{ num_instances_available }}</li>
-    <li><strong>Genres: </strong>{{ num_genres }}</li>
-    <li><strong>Authors: </strong>{{ num_authors }}</li>
-  </ul>
+  <div class="card-body">
+    <p><em>A tutorial by the Mozilla Development Network</em></p>
+  </div>
+  <div class="container-fluid">
+    <h3>
+      Library Records
+      <small class="text-muted">Quick stats about the books and authors available</small>
+    </h3>
+    <ul>
+      <li class="card-text"><strong>Books: </strong>{{ num_books }}</li>
+      <li class="card-text"><strong>Copies: </strong>{{ num_instances }}</li>
+      <li class="card-text"><strong>Copies Available: </strong>{{ num_instances_available }}</li>
+      <li class="card-text"><strong>Genres: </strong>{{ num_genres }}</li>
+      <li class="card-text"><strong>Authors: </strong>{{ num_authors }}</li>
+    </ul>
+  </div>
 </div>
 
 <div class="fixed-bottom" style="margin-bottom: 10px; margin-left: 10px;">
