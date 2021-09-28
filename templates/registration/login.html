@@ -3,38 +3,30 @@
 {% block content %} 
     
     {% if form.errors %}
-
-    <div class="alert alert-warning" role="alert">
-        Your email or password didn't match. Try again.
-    </div>
-
+        <div class="alert alert-warning" role="alert">
+            Your email or password didn't match. Try again.
+        </div>
     {% endif %}
     
     {% if next %}
-
         {% if user.is_authenticated %}
-
             <div class="alert alert-warning" role="alert">
                 Your account doesn't have access to this page. To proceed, please login with an account that has access.
             </div>
-
         {% else %}
-
             <div class="alert alert-warning" role="alert">
                 Please login to view this page.
             </div>
-
         {% endif %}    
-
     {% endif %}
+
     <br>
     <div class="container" role="main">
         <div class="card justify-content-center" style="margin-left: 400px; margin-right: 400px;">
             <article class="card-body">
                 <h4 class="card-title text-center mb-4 mt-1">Sign in</h4>
                 <hr>
-                <p class="text-success text-center">Login bro</p>
-
+                <p class="text-success text-center">Enter your email and password</p>
                 <form action="{% url 'login' %}" method="post">
                     {% csrf_token %}
                     <div class="form-group">
@@ -48,7 +40,7 @@
                                     </i>
                                 </span>
                             </div>
-                            <input class="form-control" placeholder="Email or Login" type="email">
+                            <input class="form-control" placeholder="Email" type="email">
                         </div>
                         <!--input group//-->
                     </div>
@@ -81,7 +73,7 @@
                     <!--form group//-->
                 </form>
                 <p class="text-center">
-                    <a class="btn" href="{% url 'password_reset' %}">Forgot password?</a>
+                    <a href="{% url 'password_reset' %}">Forgot password?</a>
                 </p>
             </article>
         </div>

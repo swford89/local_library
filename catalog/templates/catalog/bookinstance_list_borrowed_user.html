@@ -1,0 +1,28 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+    
+    {% if bookinstance_list %}
+        
+        <div class="container-fluid">
+            <div class="card-body">
+                <h2 class="card-title">Borrowed Books</h2>
+                
+                {% for book_instance in bookinstance_list %}
+                    
+                    <li class="card-text">{{ book_instance }}</li>
+
+                {% endfor %}
+                    
+            </div>
+        </div>
+
+    {% else %}
+
+    <div class="alert alert-warning" role="alert">
+        Uh oh -- you either have not borrowed any books, or something went wrong.
+    </div>
+
+    {% endif %}
+
+{% endblock content %}
