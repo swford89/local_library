@@ -1,4 +1,6 @@
 import uuid
+from datetime import date
+from django.contrib.auth.models import User
 from django.db import models
 # from django.urls import reverse
 
@@ -30,11 +32,6 @@ class Author(models.Model):
     class Meta:
         ordering = ['last_name', 'first_name', 'middle_name']
 
-    # using dynamic url instead
-    # def get_absolute_url(self):
-    #     """Returns the url to access a particular author instance."""
-    #     return reverse('author_detail', args=[str(self.id)])
-
     def __str__(self):
         if self.middle_name:
             return f"{self.last_name}, {self.first_name} {self.middle_name}."
@@ -58,11 +55,6 @@ class Book(models.Model):
     def __str__(self):
         """String representation of Book object."""
         return self.title
-    
-    # using dynamic url instead
-    # def get_absolute_url(self):
-    #     """Returns the url to access a detail record for this book."""
-    #     return reverse('book_detail', args=[str(self.id)])
 
     def display_genre(self):
         """Create a string for genre; required to display genre in Admin"""
@@ -76,6 +68,7 @@ class BookInstance(models.Model):
     book = models.ForeignKey('Book', on_delete=models.RESTRICT, null=True)
     imprint = models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)
+    borrower = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     LOAN_STATUS = (
         ('m', 'Maintenance'),
@@ -97,3 +90,10 @@ class BookInstance(models.Model):
 
     def __str__(self):
         return f"{self.id} ({self.book.title})"
+
+    @property
+    def is_overdue(self):
+        """method that checks whether a book is overdue or not"""
+        if self.due_back and date.today() > self.due_back:
+            return True
+        return False

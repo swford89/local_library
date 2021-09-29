@@ -1,9 +1,8 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render
-from django.urls import reverse
 from django.views import generic
-from django.views.generic.list import ListView
-from catalog.models import Author, Book, BookInstance, Genre, Language
+from catalog.models import Author, Book, BookInstance, Genre
 
 # Create your views here.
 def index(request):
@@ -36,19 +35,9 @@ class BookListView(generic.ListView):
     template_name = "catalog/book_list.html"
     paginate_by = 10
 
-# def book_list(request):
-#     book_list = Book.objects.all()
-#     context = {"book_list": book_list}
-#     return render(request, "catalog/book_list.html", context)
-
 class AuthorListView(generic.ListView):
     model = Author
     template_name = "catalog/author_list.html"
-
-# def author_list(request):
-#     authors_list = Author.objects.all()
-#     context = {"authors_list": authors_list}
-#     return render(request, "catalog/author_list.html", context)
 
 class BookDetailView(generic.DetailView):
     model = Book
@@ -57,6 +46,14 @@ class BookDetailView(generic.DetailView):
 class AuthorDetailView(generic.DetailView):
     model = Author
     template_name = "catalog/author_detail.html"
+
+class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
+    model = BookInstance
+    template_name = "catalog/book_instance_list_borrowed_user.html"
+    paginate_by = 10
+
+    def get_queryset(self):
+        return BookInstance.objects.filter(borrower=self.request.user).filter(status__exact="o").order_by("due_back")
 
 # search view
 def search(request):
@@ -70,3 +67,5 @@ def search(request):
             "authors": authors,
             }
         return render(request, "catalog/search.html", context)
+
+# login required views
