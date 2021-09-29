@@ -30,13 +30,20 @@
             </ul>
             
             <ul class="navbar-nav justify-content-right">
-                <li class="nav-item">
                 {% if user.is_authenticated %}
-                    <li><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">You</a>
+                        <ul class="dropdown-menu" style="right: 0; left: auto;">
+                            <li><a class="dropdown-item" href="{% url 'catalog:my_borrowed' %}">mybooks</a></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                        </ul>
+                    </li>
+                    
                 {% else %}
+                <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{% url 'login' %}">Login</a>
-            {% endif %}
                 </li>
+                {% endif %}
             </ul>
                 
         </div>
