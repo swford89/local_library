@@ -1,0 +1,66 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+    
+    
+    {% if perms %}
+
+        {% if bookinstance_list %}
+
+            <div class="container-fluid">
+                <div class="card-body">
+                    <h2 class="card-title">Borrowed Books</h2>
+                    
+                    {% for book_instance in bookinstance_list %}
+                        
+                        {% if book_instance.is_overdue %}
+                            <div class="container-fluid">
+                                <div class="card-body">
+                                    <h4 class="card-title text-muted">{{ book_instance.book }}</h4>
+                                    <li class="card-text"><strong>ID: </strong>{{ book_instance.id }}</li>
+                                    <li class="card-text"><strong>USER: </strong>{{ book_instance.borrower }}</li>
+                                    <li class="card-text"><strong>DUE DATE: </strong>OVERDUE. Was due back on: <strong class="text-danger">{{ book_instance.due_back }}</strong></li>
+                                </div>
+                            </div>
+
+                        {% else %}
+
+                            <div class="container-fluid">
+                                <div class="card-body">
+                                    <h4 class="card-title text-muted">{{ book_instance.book }}</h4>
+                                    <li class="card-text"><strong>ID: </strong>{{ book_instance.id }}</li>
+                                    <li class="card-text"><strong>USER: </strong>{{ book_instance.borrower }}</li>
+                                    
+                                    {% if book_instance.status == "o" %}
+                                        
+                                        <li class="card-text"><strong>DUE DATE: </strong> Please return by: <strong class="text-warning">{{ book_instance.due_back }}</strong></li>
+
+                                    {% endif %}
+                                        
+                                </div>
+                            </div>
+
+                        {% endif %}
+
+                    {% endfor %}
+                        
+                </div>
+            </div>
+
+            {% else %}
+
+                <div class="alert alert-warning" role="alert">
+                    Uh oh -- you either have not borrowed any books, or something went wrong.
+                </div>
+
+        {% endif %}
+
+    {% else %}
+
+        <div class="alert alert-warning" role="alert">
+            Uh oh -- it doesn't look like you have the required permissions to view this page.
+        </div> 
+
+    {% endif %}
+
+{% endblock content %}
