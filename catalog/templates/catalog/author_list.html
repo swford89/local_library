@@ -5,11 +5,13 @@
     
     {% if author_list %}
     <br>    
-    <div class="container-fluid">  
-        <h5>Author List:</h5>
-        {% for author in author_list %}
-            <li><a href="{% url 'catalog:author_detail' author.id %}">{{ author }}</a></li>
-        {% endfor %}
+    <div class="container-fluid">
+        <div class="card-body">            
+            <h5 class="card-title">Author List:</h5>
+            {% for author in author_list %}
+                <li class="card-text"><a href="{% url 'catalog:author_detail' author.id %}">{{ author }}</a></li>
+            {% endfor %}
+        </div>
     </div>
 
     {% else %}

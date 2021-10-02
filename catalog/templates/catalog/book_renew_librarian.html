@@ -1,0 +1,32 @@
+{% extends 'catalog/base.html' %}
+
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="card-body">
+            <h4 class="card-title">Renew Book: {{ book_instance.title }}</h4>
+            <p class="card-text"><strong>USER: {{ book_instance.borrower }}</strong></p>
+            
+            {% if book_instance.is_overdue %}
+                
+                <p class="card-text">OVERDUE: Was due back on <strong class="text-danger">{{ book_instance.due_back }}</strong></p>
+
+            {% else %}
+
+                <p class="card-text">DUE BACK: <strong class="text-warning">{{ book_instance.due_back }}</strong></p>
+
+            {% endif %}
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <table>
+                    {{ form.as_table }}
+                </table>
+                <input type="submit" value="Submit">
+            </form> 
+        </div>
+    </div>
+
+
+{% endblock content %}

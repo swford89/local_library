@@ -7,10 +7,12 @@
         
         <br>    
         <div class="container-fluid"> 
-            <h5>Book List:</h5> 
-            {% for book in book_list %}
-                <li><a href="{% url 'catalog:book_detail' book.id %}">{{ book.title }}</a></li> 
-            {% endfor %}
+            <div class="card-body">
+                <h5 class="card-title">Book List:</h5> 
+                {% for book in book_list %}
+                    <li class="card-text"><a href="{% url 'catalog:book_detail' book.id %}">{{ book.title }}</a></li> 
+                {% endfor %}
+            </div>
         </div>
 
     {% else %}
