@@ -20,6 +20,8 @@
                                     <li class="card-text"><strong>ID: </strong>{{ book_instance.id }}</li>
                                     <li class="card-text"><strong>USER: </strong>{{ book_instance.borrower }}</li>
                                     <li class="card-text"><strong>DUE DATE: </strong>OVERDUE. Was due back on: <strong class="text-danger">{{ book_instance.due_back }}</strong></li>
+                                    <br>
+                                    <a class="btn btn-primary btn-block" href="{% url 'catalog:renew_book_librarian' book_instance.id %}">Renew</a>
                                 </div>
                             </div>
                             <hr>
@@ -35,6 +37,8 @@
                                     {% if book_instance.status == "o" %}
                                         
                                         <li class="card-text"><strong>DUE DATE: </strong> Please return by: <strong class="text-warning">{{ book_instance.due_back }}</strong></li>
+                                        <br>
+                                        <a class="btn btn-primary btn-block" href="{% url 'catalog:renew_book_librarian' book_instance.id %}">Renew</a>
 
                                     {% endif %}
                                         
