@@ -1,0 +1,23 @@
+{% extends 'catalog/base.html' %}
+
+
+{% block content %}
+    
+    
+    {% if user.is_superuser %}
+    
+        <br>
+        <div class="container-fluid">
+            <form action="" method="post">
+                {% csrf_token %}
+                <table>
+                    {{ form.as_table }}
+                </table>
+                <br>
+                <input type="submit" value="Create">
+            </form>
+        </div>
+
+    {% endif %}
+
+{% endblock content %}
