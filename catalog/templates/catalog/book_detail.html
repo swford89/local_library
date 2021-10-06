@@ -39,7 +39,18 @@
           {% elif copy.status == "o" %}
 
           <div style="margin-left: 20px;">
-            <h5 class="text-danger">On loan</h5>
+            
+            {% if copy.is_overdue %}
+              
+              <h5 class="text-danger"> On loan</h5>
+
+            {% else %}
+
+              <h5 class="text-warning">On loan</h5>
+
+            {% endif %}
+              
+            
             <p><em>-- Due back: </em>{{ copy.due_back }}</p>
             <ol><strong>ID: </strong>{{ copy.id }}</ol>
           </div>

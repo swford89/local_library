@@ -1,0 +1,25 @@
+{% extends 'catalog/base.html' %}
+
+
+{% block content %}
+    
+    {% if user.is_superuser %}
+        
+        <div class="alert alert-warning">
+            Delete Author: {{ author }} -- are you sure?
+        </div>
+        
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Delete">
+        </form>
+
+    {% else %}
+        
+        <div class="alert alert-warning">
+            You don't seem to be authorized to access this page. Check with your admin for more details.
+        </div>
+
+    {% endif %}
+
+{% endblock content %}

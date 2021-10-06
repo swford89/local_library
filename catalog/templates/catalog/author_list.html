@@ -4,15 +4,33 @@
 
     
     {% if author_list %}
-    <br>    
+
+    <br>
     <div class="container-fluid">
+        <section>
         <div class="card-body">            
             <h5 class="card-title">Author List:</h5>
             {% for author in author_list %}
                 <li class="card-text"><a href="{% url 'catalog:author_detail' author.id %}">{{ author }}</a></li>
             {% endfor %}
         </div>
+        </section>
     </div>
+    
+
+    {% if user.is_superuser %}
+
+    <br>
+    <div class="container-fluid">
+        <aside>
+            <ul class="nav justify-content-right">
+                <a class="btn btn-primary" href="{% url 'catalog:author_create' %}">Create Author</a>
+            </ul>
+        </aside>
+    </div>
+
+    {% endif %}
+        
 
     {% else %}
         <div class="alert alert-warning" role="alert">

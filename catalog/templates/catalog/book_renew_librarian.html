@@ -21,8 +21,15 @@
             <form action="" method="post">
                 {% csrf_token %}
                 <table>
-                    {{ form.as_table }}
+                    
+                    {% for field in form %}
+
+                        <li><strong>{{ field.label|upper }}</strong>: {{ field }} <em class="text-muted">{{ field.help_text  }}</em></li>   
+
+                    {% endfor %}
+                                            
                 </table>
+                <br>
                 <input type="submit" value="Submit">
             </form> 
         </div>
