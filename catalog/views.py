@@ -5,11 +5,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
-from django.urls.base import reverse
+from django.urls.base import reverse, reverse_lazy
 from django.views import generic
-from catalog.models import Author, Book, BookInstance, Genre
+from django.views.generic import CreateView, UpdateView, DeleteView
 
 from catalog.forms import RenewBookForm
+from catalog.models import Author, Book, BookInstance, Genre
 
 # index page view.
 def index(request):
@@ -120,3 +121,16 @@ def renew_book_librarian(request, pk):
         }
 
     return render(request, "catalog/book_renew_librarian.html", context)
+
+# generic views editing for Author model
+class AuthorCreate(CreateView, PermissionRequiredMixin):
+    model = Author
+    fields = ["first_name", "last_name", "date_of_birth", "date_of_death"]
+    initial = {"date_of_death": "11/06/2020"}
+
+class AuthorUpdate(UpdateView, PermissionRequiredMixin):
+    model = Author
+
+class AuthorDelete(DeleteView, PermissionRequiredMixin):
+    model = Author
+    success_url = reverse_lazy("catalog:author_list")

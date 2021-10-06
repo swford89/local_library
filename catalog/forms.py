@@ -1,10 +1,11 @@
 import datetime
+
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
 class RenewBookForm(forms.Form):
-    renewal_date = forms.DateField(help_text="Enter a date between now and four weeks (default = three weeks).")
+    renewal_date = forms.DateField(label="RENEWAL DATE", help_text="Enter a date between now and four weeks (default = three weeks).")
 
     def clean_renewal_date(self):
         # get the renewal date
