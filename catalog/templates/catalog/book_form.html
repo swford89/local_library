@@ -8,14 +8,18 @@
     
         <br>
         <div class="container-fluid">
-            <form action="" method="post">
-                {% csrf_token %}
-                <table>
-                    {{ form.as_table }}
-                </table>
+            <div class="card-body">
+                <h3 class="card-title">Book Update/Create</h3>
                 <br>
-                <input type="submit" value="Create">
-            </form>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <table>
+                            {{ form.as_table }}
+                        </table>
+                        <br>
+                        <input type="submit" value="Create">
+                    </form>
+            </div>
         </div>
 
     {% endif %}
