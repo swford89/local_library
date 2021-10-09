@@ -47,6 +47,7 @@ class BookListView(generic.ListView):
 class AuthorListView(generic.ListView):
     model = Author
     template_name = "catalog/author_list.html"
+    paginate_by = 10
 
 class BookDetailView(generic.DetailView):
     model = Book
@@ -56,7 +57,7 @@ class AuthorDetailView(generic.DetailView):
     model = Author
     template_name = "catalog/author_detail.html"
 
-# login required
+# login required view
 class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
     model = BookInstance
     template_name = "catalog/bookinstance_list_borrowed_user.html"
@@ -65,7 +66,7 @@ class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return BookInstance.objects.filter(borrower=self.request.user).filter(status__exact="o").order_by("due_back")
 
-# permission required
+# permission required view
 class LoanedBooksStaffListView(PermissionRequiredMixin, generic.ListView):
     model = BookInstance
     template_name = "catalog/bookinstance_list_borrowed_admin.html"
@@ -74,6 +75,30 @@ class LoanedBooksStaffListView(PermissionRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return BookInstance.objects.filter(status__exact="o").order_by("due_back")
+
+# generic views editing for Author model
+class AuthorCreate(CreateView, PermissionRequiredMixin):
+    model = Author
+    fields = ["first_name", "last_name", "date_of_birth", "date_of_death"]
+    initial = {"date_of_death": "11/06/2020"}
+
+class AuthorUpdate(UpdateView, PermissionRequiredMixin):
+    model = Author
+
+class AuthorDelete(DeleteView, PermissionRequiredMixin):
+    model = Author
+    success_url = reverse_lazy("catalog:author_list")
+
+# generic view editing for Book model
+class BookCreate(CreateView, PermissionRequiredMixin):
+    model = Book
+    fields = ["title", "author", "summary", "isbn", "genre", "language"]
+
+class BookUpdate(UpdateView, PermissionRequiredMixin):
+    model = Book
+
+class BookDelete(DeleteView, PermissionRequiredMixin):
+    model = Book
 
 # searching for book or author
 def search(request):
@@ -121,27 +146,3 @@ def renew_book_librarian(request, pk):
         }
 
     return render(request, "catalog/book_renew_librarian.html", context)
-
-# generic views editing for Author model
-class AuthorCreate(CreateView, PermissionRequiredMixin):
-    model = Author
-    fields = ["first_name", "last_name", "date_of_birth", "date_of_death"]
-    initial = {"date_of_death": "11/06/2020"}
-
-class AuthorUpdate(UpdateView, PermissionRequiredMixin):
-    model = Author
-
-class AuthorDelete(DeleteView, PermissionRequiredMixin):
-    model = Author
-    success_url = reverse_lazy("catalog:author_list")
-
-# generic view editing for Book model
-class BookCreate(CreateView, PermissionRequiredMixin):
-    model = Book
-    fields = ["title", "author", "summary", "isbn", "genre", "language"]
-
-class BookUpdate(UpdateView, PermissionRequiredMixin):
-    model = Book
-
-class BookDelete(DeleteView, PermissionRequiredMixin):
-    model = Book
