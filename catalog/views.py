@@ -103,7 +103,6 @@ class BookDelete(DeleteView, PermissionRequiredMixin):
 # searching for book or author
 def search(request):
     """searching for book title from search bar"""
-
     user_search = request.GET['search']
 
     if user_search:
@@ -120,7 +119,6 @@ def search(request):
 @permission_required("catalog.can_mark_returned", raise_exception=True)
 def renew_book_librarian(request, pk):
     """function for renewing books"""
-
     book_instance = get_object_or_404(BookInstance, pk=pk)
 
     # if recieving a POST request specifying a renewal date
