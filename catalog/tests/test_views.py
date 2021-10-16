@@ -245,3 +245,30 @@ class RenewBookInstanceViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         # check for correct template
         self.assertTemplateUsed(response, "catalog/book_renew_librarian.html")
+
+    def test_form_renewal_date_initially_has_date_three_weeks_in_future(self):
+        login = self.client.login(username="testusertwo", password="2HJ1vRV0Z&3iD")
+        response = self.client.get(reverse("catalog:renew_book_librarian", kwargs={"pk": self.test_bookinstance_one.pk}))
+        self.assertEqual(response.status_code, 200)
+        three_weeks_date = datetime.date.today() + datetime.timedelta(weeks=3)
+        self.assertEqual(response.context["form"].initial["renewal_date"], three_weeks_date)
+
+    def test_redirect_to_all_borrowed_book_list_on_successful_renewal(self):
+        login = self.client.login(username="testusertwo", password="2HJ1vRV0Z&3iD")
+        valid_future_date = datetime.date.today() + datetime.timedelta(weeks=2)
+        response = self.client.post(reverse("catalog:renew_book_librarian", kwargs={"pk": self.test_bookinstance_one.pk}), {"renewal_date": valid_future_date})
+        self.assertRedirects(response, reverse("catalog:all_borrowed"))
+
+    def test_form_invalid_renewal_date_past(self):
+        login = self.client.login(username="testusertwo", password="2HJ1vRV0Z&3iD")
+        past_date = datetime.date.today() - datetime.timedelta(weeks=1)
+        response = self.client.post(reverse("catalog:renew_book_librarian", kwargs={"pk": self.test_bookinstance_one.pk}), {"renewal_date": past_date})
+        self.assertEqual(response.status_code, 200)
+        self.assertFormError(response, "form", "renewal_date", "Invalid date -- renewal in past.")
+
+    def test_form_invalid_renewal_date_future(self):
+        login = self.client.login(username="testusertwo", password="2HJ1vRV0Z&3iD")
+        invalid_future_date = datetime.date.today() + datetime.timedelta(weeks=5)
+        response = self.client.post(reverse("catalog:renew_book_librarian", kwargs={"pk": self.test_bookinstance_one.pk}), {"renewal_date": invalid_future_date})
+        self.assertEqual(response.status_code, 200)
+        self.assertFormError(response, "form", "renewal_date", "Invalid date -- renewal is more than four weeks ahead")
