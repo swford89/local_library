@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 
+import dj_database_url
 import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -135,4 +136,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
 
+# initialize django heroku
 django_heroku.settings(locals())
+
+# static files
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# database settings for heroku
+DATABASES['default'] = dj_database_url.config(
+    conn_max_age=600,
+    default=f"postgres://{os.environ['POSTGRES_USER']}:{os.environ['POSTGRES_PASS']}@HOST:127.0.0.1/local_library"
+    )
