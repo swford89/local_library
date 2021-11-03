@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # myapps
     'catalog.apps.CatalogConfig',
+    'mailer',
 ]
 
 MIDDLEWARE = [
@@ -123,6 +124,19 @@ USE_L10N = True
 
 USE_TZ = True
 
+# creating email backend for password reset functionality
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'          # for dev testing to console
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'             # SMTP testing
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+# EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+EMAIL_BACKEND = 'mailer.backend.DbBackend'                                  # for production
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = os.environ['SENDGRID_USER']
+EMAIL_HOST_PASSWORD = os.environ['SENDGRID_API_KEY']
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = os.environ['EMAIL']
+EMAIL_USE_TLS = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
