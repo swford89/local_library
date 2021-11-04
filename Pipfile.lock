@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "903b13f51e3865b4aee8050ca924b675b08de9fa00ad63392534b00fa96c351f"
+            "sha256": "0c2b37fb410c5e8cf188ba596b4247465722b68503ae1e762220279dcb815eab"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -47,6 +47,14 @@
             "index": "pypi",
             "version": "==0.3.1"
         },
+        "django-mailer": {
+            "hashes": [
+                "sha256:2013e723bcc7c34143c8ecceaaa1b58918856c3ad1d9a79e27b5dd2530ef4d86",
+                "sha256:a79914dbf87c431aca6888f4d453136e3ec2162aea56cd05972996f4fc36e5bc"
+            ],
+            "index": "pypi",
+            "version": "==2.1"
+        },
         "gunicorn": {
             "hashes": [
                 "sha256:9dcc4547dbb1cb284accfb15ab5667a0e5d1881cc443e0677b4882a4067a807e",
@@ -54,6 +62,13 @@
             ],
             "index": "pypi",
             "version": "==20.1.0"
+        },
+        "lockfile": {
+            "hashes": [
+                "sha256:6aed02de03cba24efabcd600b30540140634fc06cfa603822d508d5361e9f799",
+                "sha256:6c3cb24f344923d30b2785d5ad75182c8ea7ac1b6171b08657258ec7429d50fa"
+            ],
+            "version": "==0.12.2"
         },
         "psycopg2": {
             "hashes": [
@@ -115,6 +130,13 @@
                 "sha256:acad2d8b20a1af07d4e4c9d2e9285c5ed9104354062f275f3fcd88dcef4f1326"
             ],
             "version": "==2021.3"
+        },
+        "six": {
+            "hashes": [
+                "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926",
+                "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"
+            ],
+            "version": "==1.16.0"
         },
         "sqlparse": {
             "hashes": [
