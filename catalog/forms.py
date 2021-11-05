@@ -20,4 +20,3 @@ class RenewBookForm(forms.Form):
             raise ValidationError(_("Invalid date -- renewal is more than four weeks ahead"))
 
         return data
-

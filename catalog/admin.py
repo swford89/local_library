@@ -1,8 +1,8 @@
 from django.contrib import admin
+
 from catalog.models import Book, Author, Genre, BookInstance, Language
 
 # Register your models here.
-
 class BookInline(admin.TabularInline):
     model = Book
 
