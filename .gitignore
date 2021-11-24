@@ -1,0 +1,3 @@
+staticfiles/
+local_library/__pycache__
+catalog/__pycache__
